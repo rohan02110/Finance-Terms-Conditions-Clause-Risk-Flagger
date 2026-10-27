@@ -1,0 +1,8 @@
+[project]
+name = "finance-tc-risk-flagger"
+version = "1.0.0"
+description = "Finance T&C Clause Risk Flagger"
+requires-python = ">=3.11"
+
+[tool.vercel]
+entrypoint = "api.analyze:handler"

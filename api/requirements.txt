@@ -1,0 +1,3 @@
+# Vercel Serverless Function Dependencies
+# The function api/analyze.py uses Python's standard library (math, re, json, http.server).
+# Keeping this file lightweight avoids pulling the large PyTorch package during Vercel deployment.

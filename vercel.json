@@ -1,15 +1,18 @@
 {
-  "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/analyze",
-      "dest": "/api/analyze.py"
+      "source": "/api/analyze",
+      "destination": "/api/analyze.py"
     },
     {
-      "src": "/(.*)",
-      "dest": "/public/$1"
+      "source": "/api",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/public/$1"
     }
   ]
 }
