@@ -1,0 +1,17 @@
+# Core ML & Numerical Computing
+numpy>=2.0.0
+pandas>=2.2.0
+scikit-learn>=1.5.0
+torch>=2.2.0
+
+# Text & Extraction
+pdfplumber>=0.11.0
+
+# Web Application
+streamlit>=1.35.0
+
+# Testing & Exploration
+pytest>=8.0.0
+ipykernel>=6.29.0
+pyarrow>=15.0.0
+requests>=2.31.0

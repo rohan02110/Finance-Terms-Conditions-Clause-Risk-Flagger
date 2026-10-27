@@ -1,0 +1,21 @@
+{
+  "name": "finance-tc-risk-flagger",
+  "version": "1.0.0",
+  "description": "Educational ANN-powered Finance Terms & Conditions Clause Risk Flagger built for Vercel",
+  "main": "public/index.html",
+  "scripts": {
+    "dev": "npx serve public -l 3000",
+    "start": "npx serve public -l 3000",
+    "build": "echo 'Build complete'"
+  },
+  "keywords": [
+    "terms-of-service",
+    "neural-network",
+    "fintech",
+    "nlp",
+    "risk-flagger",
+    "vercel"
+  ],
+  "author": "Antigravity & Mentor Team",
+  "license": "MIT"
+}

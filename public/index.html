@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T&C Clause Risk Flagger — Finance Contract Review</title>
+  <meta name="description" content="Educational decision-support neural network that flags potentially unfair and risky clauses in financial Terms & Conditions.">
+  
+  <!-- Modern Typography from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Mandatory Non-Dismissible Safety Disclaimer Banner -->
+  <div id="disclaimer-banner" class="disclaimer-banner" role="alert">
+    <div class="disclaimer-content">
+      <span class="disclaimer-icon">⚠️</span>
+      <p>
+        <strong>IMPORTANT LEGAL & FINANCIAL DISCLAIMER:</strong>
+        This tool highlights clauses for your attention and decision-making support. It <strong>never provides legal or financial advice</strong> and <strong>cannot tell you a document is safe</strong>. The absence of flags does not certify an agreement as safe to sign.
+      </p>
+    </div>
+  </div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-badge">⚡ Neural Network Decision Support • Vercel Edition</div>
+      <h1 class="header-title">Finance T&C Clause Risk Flagger</h1>
+      <p class="header-subtitle">
+        Analyze fintech, investment, and crypto agreements to expose unilateral modifications, sweeping liability waivers, forced arbitration, and asset liquidation clauses.
+      </p>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="workspace-grid">
+      <!-- Input Panel -->
+      <section class="card input-card">
+        <div class="card-header">
+          <div class="card-title-group">
+            <h2 class="card-title">Agreement Text</h2>
+            <span class="card-desc">Paste contract text or load our sample fintech agreement</span>
+          </div>
+          <div class="action-buttons">
+            <button id="btn-load-sample" class="btn btn-secondary" title="Load sample terms with typical predatory clauses">
+              💡 Load Sample T&C
+            </button>
+            <button id="btn-clear" class="btn btn-outline" title="Clear text area">Clear</button>
+          </div>
+        </div>
+
+        <textarea 
+          id="contract-text" 
+          class="contract-textarea" 
+          placeholder="Paste Terms of Service, User Agreement, or Privacy Policy clauses here..." 
+          rows="9"
+        ></textarea>
+
+        <!-- Sensitivity Controls -->
+        <div class="controls-panel">
+          <div class="control-group">
+            <div class="control-label-row">
+              <label for="threshold-slider" class="control-label">Sensitivity Threshold</label>
+              <span id="threshold-val" class="control-val">0.05</span>
+            </div>
+            <input id="threshold-slider" type="range" min="0.01" max="0.50" step="0.01" value="0.05" class="range-slider">
+            <span class="control-hint">Lower = catches more subtle/borderline clauses (favors recall)</span>
+          </div>
+
+          <div class="control-group">
+            <div class="control-label-row">
+              <label for="uncertainty-slider" class="control-label">Uncertainty Band (±)</label>
+              <span id="uncertainty-val" class="control-val">0.04</span>
+            </div>
+            <input id="uncertainty-slider" type="range" min="0.01" max="0.10" step="0.01" value="0.04" class="range-slider">
+            <span class="control-hint">Scores near threshold get labeled "Review Manually"</span>
+          </div>
+
+          <button id="btn-analyze" class="btn btn-primary btn-glow">
+            <span id="btn-text">🔍 Analyze Clauses</span>
+            <span id="btn-spinner" class="spinner hidden"></span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Results Panel -->
+      <section id="results-section" class="results-section hidden">
+        <!-- Stat Metrics -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <span class="metric-num" id="metric-total">0</span>
+            <span class="metric-label">Total Clauses Parsed</span>
+          </div>
+          <div class="metric-card metric-danger">
+            <span class="metric-num" id="metric-flagged">0</span>
+            <span class="metric-label">Potentially Risky Flagged</span>
+          </div>
+          <div class="metric-card metric-warning">
+            <span class="metric-num" id="metric-uncertain">0</span>
+            <span class="metric-label">Uncertain (Manual Review)</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-num" id="metric-rate">0%</span>
+            <span class="metric-label">Risk Flag Rate</span>
+          </div>
+        </div>
+
+        <!-- Filter Chips Bar -->
+        <div class="filter-bar">
+          <span class="filter-title">Filter by Category:</span>
+          <div id="filter-pills" class="filter-pills">
+            <button class="pill active" data-cat="all">All Clauses</button>
+          </div>
+        </div>
+
+        <!-- Clauses Container -->
+        <div id="clauses-container" class="clauses-container">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+    </main>
+
+    <!-- Model Card & Architecture Footer -->
+    <footer class="app-footer">
+      <div class="footer-columns">
+        <div class="footer-col">
+          <h4>🧠 Neural Network Architecture</h4>
+          <p>2-Hidden-Layer Feed-Forward ANN (`Linear(5000, 256)` → `ReLU` → `Dropout(0.3)` → `Linear(256, 64)` → `ReLU` → `Linear(64, 1)`). Optimized with class-weighted BCE loss (ratio ~7.8x) for high recall on rare unfair terms.</p>
+        </div>
+        <div class="footer-col">
+          <h4>📊 Empirical Benchmark</h4>
+          <p>Trained on the public CLAUDETTE benchmark (9,414 clauses). Evaluated on held-out test contracts: <strong>85.5% Recall</strong> on unfair clauses with tuned threshold.</p>
+        </div>
+        <div class="footer-col">
+          <h4>⚖️ Safe Decision Support</h4>
+          <p>Zero LLM generation. Explanations use verified regulatory templates and deterministic category tagging. Built for instant deployment on Vercel.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Finance T&C Clause Risk Flagger • Starter ANN Project • Fully CPU & Serverless Compatible</span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
